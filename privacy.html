@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Ramazzini</title>
+  <link rel="stylesheet" href="tokens.css" />
+  <link rel="stylesheet" href="fizzy.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .privacy {
+      max-width: 760px;
+      margin: 160px auto 96px;
+      padding: 0 32px;
+    }
+    .privacy__head { text-align: center; margin-bottom: 56px; }
+    .privacy__head .eyebrow {
+      display: inline-block;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: hsl(var(--primary));
+      margin-bottom: 14px;
+    }
+    .privacy__head h1 {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 700; letter-spacing: -0.03em; line-height: 1.05;
+      margin: 0 0 14px;
+    }
+    .privacy__head h1 em {
+      font-style: italic;
+      background: linear-gradient(135deg, hsl(152 45% 35%), hsl(160 55% 48%));
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+    }
+    .privacy__head p { font-size: 17px; color: hsl(var(--muted-foreground)); }
+    .privacy__meta { font-size: 13px; color: hsl(var(--muted-foreground)); margin-top: 10px; }
+
+    .privacy h2 {
+      font-size: 22px; font-weight: 700; letter-spacing: -0.015em;
+      margin: 56px 0 12px;
+      color: hsl(var(--foreground));
+    }
+    .privacy h2 .num {
+      display: inline-grid; place-items: center;
+      width: 28px; height: 28px;
+      margin-right: 10px;
+      border-radius: 8px;
+      background: hsl(var(--secondary));
+      color: hsl(var(--primary));
+      font-size: 13px; font-weight: 800;
+      vertical-align: 2px;
+    }
+    .privacy p { font-size: 16px; line-height: 1.7; color: hsl(var(--muted-foreground)); margin: 0 0 14px; }
+    .privacy strong { color: hsl(var(--foreground)); font-weight: 600; }
+    .privacy ul { padding-left: 22px; margin: 0 0 14px; }
+    .privacy li { font-size: 16px; line-height: 1.7; color: hsl(var(--muted-foreground)); margin-bottom: 4px; }
+    .privacy a { color: hsl(var(--primary)); text-decoration: none; border-bottom: 1px solid hsl(var(--primary) / 0.3); }
+    .privacy a:hover { border-bottom-color: hsl(var(--primary)); }
+
+    .privacy__pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 14px;
+      border-radius: 9999px;
+      background: hsl(var(--secondary));
+      color: hsl(var(--primary));
+      font-size: 13px; font-weight: 700;
+      margin-bottom: 22px;
+    }
+    .privacy__pill .dot { width: 6px; height: 6px; border-radius: 50%; background: hsl(var(--primary)); }
+    .privacy__panel {
+      padding: 24px 28px;
+      border-radius: 18px;
+      background: hsl(var(--secondary) / 0.5);
+      border: 1px solid hsl(var(--primary) / 0.2);
+      margin: 24px 0;
+    }
+    .privacy__panel b { color: hsl(var(--foreground)); }
+  </style>
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="brand" href="index.html">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3c3.5 4 3.5 8 0 12-3.5-4-3.5-8 0-12z" fill="currentColor" stroke="none" opacity="0.95"/>
+            <path d="M12 12c2 2 3 4 3 9"/>
+            <path d="M12 12c-2 2-3 4-3 9"/>
+          </svg>
+        </span>
+        <span class="brand__name">Ramazzini</span>
+      </a>
+      <nav class="nav__actions">
+        <a class="nav__link" href="index.html">← Back to home</a>
+        <button class="btn fizzy" type="button" onclick="location.href='index.html#top'">
+          Join Beta Test
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="privacy">
+    <div class="privacy__head">
+      <span class="eyebrow">Legal</span>
+      <h1>Privacy <em>policy</em>.</h1>
+      <p>How we handle the data you trust us with — written in plain English, no surprises.</p>
+      <div class="privacy__meta">Effective: November 1, 2025  ·  Last updated: November 1, 2025</div>
+    </div>
+
+    <span class="privacy__pill"><span class="dot"></span>Closed-loop ecosystem</span>
+
+    <p>This privacy policy explains what data Ramazzini Software, Inc. ("Ramazzini," "we," or "us") collects when you use our software and website, how we use it, who we share it with (very few parties), and the choices you have. By using Ramazzini, you agree to the practices described here.</p>
+
+    <p>We are committed to handling your data in compliance with <strong>all applicable laws and regulations</strong>, including (where they apply to you) the California Consumer Privacy Act (CCPA/CPRA), the EU General Data Protection Regulation (GDPR), the UK Data Protection Act, the Personal Information Protection and Electronic Documents Act (PIPEDA) in Canada, the Health Insurance Portability and Accountability Act (HIPAA) where relevant to occupational health contexts, and OSHA recordkeeping rules where they intersect with the information you process in our platform.</p>
+
+    <h2><span class="num">1</span>What we collect</h2>
+    <p>We collect only what we need to provide the service. Specifically:</p>
+    <ul>
+      <li><strong>Account data.</strong> Name, work email, organization, role, and password (hashed).</li>
+      <li><strong>Uploaded content.</strong> Lab reports, contextual field notes, observational data, and the reports Ramazzini generates from them. This content is <strong>your data</strong>.</li>
+      <li><strong>Usage data.</strong> Pages visited, features used, error logs, and approximate location (derived from IP) for security and product improvement.</li>
+      <li><strong>Billing data.</strong> Handled by our payment processor (Stripe). We don't store your card number.</li>
+    </ul>
+
+    <h2><span class="num">2</span>How we use your data</h2>
+    <ul>
+      <li>To provide the service — parse your reports, generate outputs, store your work, sync across devices.</li>
+      <li>To support you when you ask for help.</li>
+      <li>To improve product quality through aggregated, de-identified metrics.</li>
+      <li>To send essential service notices (billing, security, downtime). Marketing emails are opt-in and can be turned off at any time.</li>
+    </ul>
+
+    <div class="privacy__panel">
+      <b>The closed-loop promise.</b>
+      <p style="margin-top: 8px;">Your lab reports, contextual notes, and the reports we generate from them <strong>do not leave the Ramazzini ecosystem</strong>. We do not sell your data. We do not use your content to train third-party models. Period.</p>
+    </div>
+
+    <h2><span class="num">3</span>How we store &amp; protect it</h2>
+    <ul>
+      <li>Encryption in transit (TLS 1.2+) and at rest (AES-256).</li>
+      <li>Access controls, least-privilege staffing, and routine security review.</li>
+      <li>Tenant isolation — your content is logically separated from every other customer's.</li>
+      <li>Backups encrypted and retained on a rolling 30-day window.</li>
+    </ul>
+    <p>No system is perfect. If we discover a security incident that affects you, we will notify you in accordance with applicable breach-notification laws.</p>
+
+    <h2><span class="num">4</span>Who we share it with</h2>
+    <p>A short list, and only what is strictly necessary for them to do their job:</p>
+    <ul>
+      <li><strong>Cloud infrastructure</strong> (e.g. AWS) — to host the service.</li>
+      <li><strong>Payment processor</strong> (Stripe) — for billing.</li>
+      <li><strong>Email delivery</strong> (Postmark / SendGrid) — for transactional email.</li>
+      <li><strong>Error monitoring</strong> (Sentry) — for diagnosing bugs (scrubbed of content where feasible).</li>
+    </ul>
+    <p>We do not sell or rent your personal information. We do not share your content with advertisers. We do not let any third party train AI models on your content.</p>
+
+    <h2><span class="num">5</span>Your rights</h2>
+    <p>Depending on where you live, you have the right to:</p>
+    <ul>
+      <li><strong>Access</strong> a copy of the personal data we hold about you.</li>
+      <li><strong>Correct</strong> data that is inaccurate.</li>
+      <li><strong>Delete</strong> your account and the data tied to it.</li>
+      <li><strong>Export</strong> your content in a portable format.</li>
+      <li><strong>Object</strong> to certain processing and withdraw consent.</li>
+      <li><strong>Lodge a complaint</strong> with your local data protection authority.</li>
+    </ul>
+    <p>To exercise any of these rights, write to <a href="mailto:support@ramazziniai.com">support@ramazziniai.com</a>. We respond within 30 days.</p>
+
+    <h2><span class="num">6</span>Data retention</h2>
+    <p>We retain your account and content for as long as your account is active. If you cancel, your content is retained for 60 days (in case you change your mind), then permanently deleted from production systems. Backup expiry follows within 30 days.</p>
+
+    <h2><span class="num">7</span>International transfers</h2>
+    <p>Our primary infrastructure is in the United States. If you access Ramazzini from outside the U.S., your information will be transferred to and processed in the U.S. under the safeguards required by applicable law (Standard Contractual Clauses for EU/UK transfers).</p>
+
+    <h2><span class="num">8</span>Children</h2>
+    <p>Ramazzini is a professional product not directed at children under 16, and we do not knowingly collect their personal information.</p>
+
+    <h2><span class="num">9</span>Cookies</h2>
+    <p>We use a small number of essential cookies (authentication, security) and optional analytics cookies you can opt out of. We don't use advertising cookies.</p>
+
+    <h2><span class="num">10</span>Changes to this policy</h2>
+    <p>If we make material changes, we'll notify you by email or via the product before the change takes effect. The latest version is always at this URL.</p>
+
+    <h2 id="terms"><span class="num">11</span>Contact</h2>
+    <p>Privacy questions: <a href="mailto:support@ramazziniai.com">support@ramazziniai.com</a><br/>General: <a href="mailto:support@ramazziniai.com">support@ramazziniai.com</a><br/>Mail: Ramazzini Software, Inc., 1 Hygiene Way, Wilmington, DE 19801, USA.</p>
+
+    <div class="privacy__panel" style="margin-top: 48px;">
+      <b>Plain-English summary.</b>
+      <p style="margin-top: 8px;">We collect the data we need to run the product. We protect it with encryption and access controls. We never sell it, never train third-party models on it, and we'll honor your right to access, correct, export, or delete it. Questions? <a href="mailto:support@ramazziniai.com" style="color: hsl(var(--primary));">support@ramazziniai.com</a>.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div>© 2026 Ramazzini AI</div>
+      <nav class="footer__links">
+        <a href="privacy.html">Privacy</a>
+        <a href="privacy.html#terms">Terms</a>
+        <a href="faq.html">Beta FAQ</a>
+        <a href="mailto:support@ramazziniai.com">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="fizzy.js"></script>
+  <script>
+    // sticky nav background
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 30);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  </script>
+</body>
+</html>

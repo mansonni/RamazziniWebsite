@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Ramazzini · Control panel</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+
+  <!-- ===== Lock screen ============================================ -->
+  <div class="lock" id="lock">
+    <form class="lock__panel" id="lockForm" autocomplete="off">
+      <div class="lock__brand">
+        <span class="lock__dot"></span>
+        Ramazzini · Control panel
+      </div>
+      <h1>Restricted access</h1>
+      <p>Enter the shared password to edit live site content.</p>
+      <label class="field">
+        <span>Username</span>
+        <input type="text" id="lockUser" autocomplete="off" autocapitalize="off" required />
+      </label>
+      <label class="field">
+        <span>Password</span>
+        <input type="password" id="lockPw" autocomplete="off" required />
+      </label>
+      <button class="btn btn--primary" type="submit">Unlock</button>
+      <p class="lock__hint" id="lockHint"></p>
+    </form>
+  </div>
+
+  <!-- ===== App ==================================================== -->
+  <div class="app" id="app" hidden>
+
+    <!-- Top bar -->
+    <header class="topbar">
+      <div class="topbar__brand">
+        <span class="lock__dot"></span>
+        <strong>Ramazzini</strong> · Control panel
+      </div>
+      <div class="topbar__actions">
+        <button class="btn btn--ghost" type="button" id="previewBtn" title="Open site preview in a new tab">Preview site ↗</button>
+        <button class="btn btn--ghost" type="button" id="settingsBtn" title="GitHub + Cloudinary credentials">Settings</button>
+        <button class="btn btn--ghost" type="button" id="exportBtn" title="Download content.json">Export</button>
+        <button class="btn btn--ghost" type="button" id="importBtn" title="Import a content.json file">Import</button>
+        <input type="file" id="importFile" accept="application/json" hidden />
+        <button class="btn btn--primary" type="button" id="publishBtn">
+          <span id="publishLabel">Publish to live site</span>
+        </button>
+        <button class="btn btn--ghost" type="button" id="lockBtn" title="Lock the panel">Lock</button>
+      </div>
+    </header>
+
+    <!-- Body: sidebar + content -->
+    <div class="layout">
+      <nav class="side" id="sidebar"></nav>
+      <main class="content" id="content"></main>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" hidden></div>
+
+    <!-- Settings dialog -->
+    <div class="dialog" id="settingsDialog" hidden>
+      <div class="dialog__panel">
+        <h2>Settings</h2>
+        <p class="dialog__intro">Credentials are stored in this browser's <code>localStorage</code> only. They never leave your device except to talk directly to GitHub or Cloudinary.</p>
+
+        <h3>GitHub</h3>
+        <label class="field"><span>Repo owner</span><input type="text" id="ghOwner" placeholder="mansonni" /></label>
+        <label class="field"><span>Repo name</span><input type="text" id="ghRepo" placeholder="RamazziniWebsite" /></label>
+        <label class="field"><span>Branch</span><input type="text" id="ghBranch" placeholder="main" /></label>
+        <label class="field"><span>Personal Access Token</span><input type="password" id="ghToken" placeholder="github_pat_..." /></label>
+        <p class="hint">Create a fine-grained PAT scoped to this repo with <b>Contents: Read &amp; Write</b>. <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Create PAT ↗</a></p>
+
+        <h3>Cloudinary (image uploads)</h3>
+        <label class="field"><span>Cloud name</span><input type="text" id="cdCloud" placeholder="your-cloud-name" /></label>
+        <label class="field"><span>Unsigned upload preset</span><input type="text" id="cdPreset" placeholder="ramazzini_unsigned" /></label>
+        <p class="hint">In Cloudinary → Settings → Upload → Add upload preset → set Signing Mode to <b>Unsigned</b>.</p>
+
+        <div class="dialog__actions">
+          <button class="btn btn--ghost" type="button" id="settingsClose">Cancel</button>
+          <button class="btn btn--primary" type="button" id="settingsSave">Save</button>
+        </div>
+      </div>
+      <div class="dialog__backdrop" data-close="settings"></div>
+    </div>
+  </div>
+
+    <script type="application/json" id="cms-seed">
+{
+  "meta": {
+    "title": "Ramazzini — Industrial hygiene reports, hours instead of days.",
+    "description": "Ramazzini turns lab reports and field notes into consultant-grade industrial hygiene reports. Built by CIHs. Save hours every week."
+  },
+  "theme": {
+    "background": "#0b0d0c",
+    "primary": "#7BD389",
+    "accent": "#7BD389"
+  },
+  "nav": {
+    "brand": "Ramazzini",
+    "brandSuffix": " AI",
+    "link1": "How it Works",
+    "link2": "The Value",
+    "link3": "The Roadmap",
+    "link4": "FAQ",
+    "signin": "Sign in",
+    "ctaLabel": "Join Beta Test"
+  },
+  "pricing": {
+    "amount": "14.99",
+    "currency": "CAD"
+  },
+  "seats": {
+    "total": 25,
+    "remaining": 25
+  },
+  "hero": {
+    "visible": true,
+    "eyebrowPrefix": "Private beta · ",
+    "eyebrowSuffix": " seats remaining",
+    "headlineLine1": "Industrial Hygiene Reports",
+    "headlineLine2Prefix": "in ",
+    "headlineAccent": "minutes",
+    "headlineLine2Suffix": ", not days.",
+    "subtitle": "Ramazzini analyzes your lab data, reads your field notes, and writes the exposure assessment report — so you can get back to the <strong>actual work</strong> of keeping people safe.",
+    "ctaPrimary": "Join Beta Test",
+    "ctaSecondary": "Watch demo",
+    "videoSrc": "assets/demo.mp4",
+    "betaCardLabel": "Founding cohort",
+    "betaCardChip": "25 founding seats",
+    "betaCardMetaTop": "seats remaining",
+    "betaCardMetaBottom": "of 25 founding members",
+    "betaCardCta": "Claim your seat"
+  },
+  "how": {
+    "visible": true,
+    "eyebrow": "How it works",
+    "title": "Three simple steps. <em>Get Your Afternoons Back!</em>",
+    "subtitle": "Drop in the lab report. Add a few field notes. Ramazzini does the exposure assessment write-up — formatted, sourced, and ready to review.",
+    "steps": [
+      {
+        "num": "01",
+        "title": "Upload your lab report",
+        "body": "PDF, CSV, or pasted text. Ramazzini parses each analyte, exposure limit, and sampling method automatically — no template wrangling."
+      },
+      {
+        "num": "02",
+        "title": "Add your contextual notes",
+        "body": "Walk-throughs, worker observations, control measures in place, voice memos. Drop in whatever you have — Ramazzini reconciles it with the data."
+      },
+      {
+        "num": "03",
+        "title": "Let Ramazzini do its thing",
+        "body": "A polished exposure assessment report with findings, recommendations and citations generated in a couple of minutes. Review, edit and send."
+      }
+    ]
+  },
+  "features": {
+    "visible": true,
+    "eyebrow": "The Value",
+    "title": "Expert Reports. <em>A couple of minutes.</em>",
+    "subtitle": "Built and validated by Certified Industrial Hygienists. Tuned for the reports you already write — just done in time to make it home for dinner.",
+    "items": [
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'/><polyline points='12 6 12 12 16 14'/></svg>",
+        "title": "Hours back, every week",
+        "body": "A 30-page exposure assessment report that took your team a day or two now lands in under an hour. Fewer late nights. More time back!",
+        "stat": "⏱  <b>6–10 hrs</b> · saved per report"
+      },
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2L2 7l10 5 10-5-10-5z'/><polyline points='2 17 12 22 22 17'/><polyline points='2 12 12 17 22 12'/></svg>",
+        "title": "Modeled by CIHs &amp; SIHs",
+        "body": "Trained on the judgement of Certified Industrial Hygienists, Senior IHs, and the junior staff who had plenty of experience drafting exposure assessment reports.",
+        "stat": "✓  <b>CIH-reviewed</b> language &amp; structure"
+      },
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><line x1='12' y1='1' x2='12' y2='23'/><path d='M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'/></svg>",
+        "title": "Thousands back, every year",
+        "body": "For an independent consultant or a team this could be tens of thousands in recovered margin annually — without hiring, without adding overhead, without dropping your standards.",
+        "stat": "$  <b>$10k–$60k or more</b> · per year depending on volume"
+      },
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/><polyline points='14 2 14 8 20 8'/><line x1='9' y1='13' x2='15' y2='13'/><line x1='9' y1='17' x2='15' y2='17'/></svg>",
+        "title": "Every analyte",
+        "body": "Currently we are referencing ACGIH TLVs, O. Reg 833, and OSHA. Ramazzini will start to automatically apply the right contaminants with full citation, exactly as your reviewer expects, as our library grows.",
+        "stat": "📎  <b>Jurisdictional Reference</b> · cited inline"
+      },
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/></svg>",
+        "title": "Your data stays yours",
+        "body": "Sensitive lab data, field notes, and final reports stay inside the Ramazzini ecosystem. No training on your clients' work, no leakage, no surprises in the next audit.",
+        "stat": "🔒  <b>Closed loop</b> · no third-party training"
+      },
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z'/></svg>",
+        "title": "Made for the work, not the hype",
+        "body": "Ramazzini doesn't redesign your workflow — it removes the tedious and technical parts. The judgement stays with you. The typing, the formatting, the citation hunting? Gone. We still encourage you to review the output — you're the smart one, after all.",
+        "stat": "✨  <b>Less typing</b> · more hygiene"
+      }
+    ]
+  },
+  "roadmap": {
+    "visible": true,
+    "eyebrow": "The roadmap",
+    "title": "What we've got <em>cookin'</em>.",
+    "subtitle": "Founding members vote on what we build first. Here's a peek at what's already on the stove — and a glimpse of what we're holding close.",
+    "items": [
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 18v-6a9 9 0 0 1 18 0v6'/><path d='M21 19a2 2 0 0 1-2 2h-1v-7h3v5zM3 19a2 2 0 0 0 2 2h1v-7H3v5z'/></svg>",
+        "chip": "Q2 – Q3",
+        "title": "Noise reports",
+        "body": "Noise exposure assessment reports based on noise dosimetry data — Leq, peak, dose and recommendations based on legislation.",
+        "secret": false
+      },
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 7 9 18 4 13'/><path d='M14 4l-1 1'/><path d='M19 9l1-1'/></svg>",
+        "chip": "Q3 – Q4",
+        "title": "Chemicals report v2",
+        "body": "Expanded analyte library, smarter SEG grouping, mixed-exposure recommendations, and reviewer-comments threading.",
+        "secret": false
+      },
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 3v18h18'/><path d='M7 14l4-4 4 4 5-5'/></svg>",
+        "chip": "Q4",
+        "title": "Bayesian Statistical Analysis",
+        "body": "Optional AIHA-style Bayesian exposure judgement on every SEG, with priors you control — for the reports that need that level of rigour.",
+        "secret": false
+      },
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='9'/><path d='M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18'/></svg>",
+        "chip": "TBD",
+        "title": "Comparative sector benchmarks",
+        "body": "Anonymous, opt-in benchmarks across sectors — see how your facility's exposures compare to industry, regional, and process peers.",
+        "secret": false
+      },
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 12h3l2-6 4 12 2-6h7'/></svg>",
+        "chip": "TBD",
+        "title": "Indoor air quality reports",
+        "body": "End-to-end IAQ — CO₂, VOCs, PM, temperature, RH — with HVAC context, source identification, and remediation framing.",
+        "secret": false
+      },
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='3'/><circle cx='12' cy='12' r='9' stroke-dasharray='2 3'/></svg>",
+        "chip": "And much more",
+        "title": "The secret menu",
+        "body": "We're not giving away everything. Founding members get the first look, and a vote on what we build next. :)",
+        "secret": true
+      }
+    ]
+  },
+  "finalCta": {
+    "visible": true,
+    "title": "Save time. Save money. Trust Ramazzini. Trust the <em>Transformation.</em>",
+    "subtitle": "25 founding seats. The first cohort closes when the counter hits zero.",
+    "ctaPrimary": "Join Beta Test",
+    "ctaSecondary": "Watch demo",
+    "hint": "of 25 seats remain  ·  secure checkout via Stripe"
+  },
+  "footer": {
+    "copyright": "© 2026 Ramazzini AI",
+    "contactEmail": "support@ramazziniai.com"
+  },
+  "faq": [
+    {
+      "group": "Program basics & eligibility",
+      "question": "What is this beta program about?",
+      "answer": "<p>It's an opportunity for early adopters to try Ramazzini and help shape how the software is built before public release. You won't just be testing — you'll be influencing the future of the field of industrial hygiene.</p>"
+    },
+    {
+      "group": "Program basics & eligibility",
+      "question": "Who can join?",
+      "answer": "<p>Industrial hygienists are the ideal fit, but other health and safety professionals are welcome too — anyone willing to put the software through real work and give meaningful feedback.</p>"
+    },
+    {
+      "group": "Program basics & eligibility",
+      "question": "How long does the beta last?",
+      "answer": "<p>12 weeks for the chemical reporting beta. We may extend or open new betas for noise, IAQ, and other report types as those roll in.</p>"
+    },
+    {
+      "group": "Program basics & eligibility",
+      "question": "Why does the beta test cost money?",
+      "answer": "<p>A small fee shows there's genuine interest in the product, and it validates the feedback we get back. The industry has seen too many free betas where users withhold negative feedback to stay polite.</p><p>Paid users tell us the truth. They show the market that Ramazzini is something professionals are willing to spend on — and in this era, free access isn't a strong indicator of demand.</p>"
+    },
+    {
+      "group": "Expectations & commitment",
+      "question": "What is expected of me?",
+      "answer": "<p>Active use of the software, completing the tasks we send your way, and honest feedback. Plan on roughly <strong>1–2 hours per week</strong>. That's it.</p>"
+    },
+    {
+      "group": "Expectations & commitment",
+      "question": "What should I do if I find a bug?",
+      "answer": "<p>Use the in-app reporting tool, the feedback form, or email us directly. Every bug report goes straight to the team that can fix it.</p>"
+    },
+    {
+      "group": "Expectations & commitment",
+      "question": "Is the software stable?",
+      "answer": "<p>It's a beta — expect bugs, including occasional big ones, and the possibility of downtime while we patch issues or implement feedback. If \"polished v1\" is what you need, the public release is the right entry point.</p>"
+    },
+    {
+      "group": "Incentives & rewards",
+      "question": "What do I get in return?",
+      "answer": "<p>A founding-member badge and lifetime access tier on your profile, a significant discount on the final product subscription, and raffles for some genuinely cool gear along the way.</p>"
+    },
+    {
+      "group": "Incentives & rewards",
+      "question": "Do I get free access after the beta?",
+      "answer": "<p>Active participants who give detailed feedback are usually rewarded with extended free access. At some point, though, every account converts to a paid subscription — that's how we keep building.</p>"
+    },
+    {
+      "group": "Technical support & privacy",
+      "question": "Will my data be safe?",
+      "answer": "<p>Yes — data security is prioritized, even though this is a pre-release product. <strong>Lab reports, contextual data, and generated reports never leave the Ramazzini ecosystem.</strong> No third-party training, no leakage.</p>"
+    },
+    {
+      "group": "Technical support & privacy",
+      "question": "Will there be technical support?",
+      "answer": "<p>Yes. Submit problems through the feedback system and we'll get back to you — please allow a couple of days for a response. We read everything.</p>"
+    }
+  ]
+}
+
+  </script>
+  <script src="admin.js"></script>
+</body>
+</html>

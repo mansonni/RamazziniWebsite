@@ -1,0 +1,258 @@
+/* ============================================================
+   Ramazzini Design System — Colors & Type
+   Source of truth: ramazzini-report-pro/src/index.css + tailwind.config.ts
+   Theme: Pastel Sage Green / Mint
+   Type:  Inter (sans, body) + Playfair Display (serif, display)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
+
+:root {
+  /* -------- Raw palette (HSL components, used with hsl(...)) -------- */
+  --background:               140 30% 98%;     /* #F8FBF8 — near-white sage */
+  --foreground:               152 35% 14%;     /* #1A3327 — deep forest text, green-tinged */
+
+  --card:                     140 30% 100%;    /* pure white card surface */
+  --card-foreground:          150 40% 10%;
+
+  --popover:                  140 30% 100%;
+  --popover-foreground:       150 40% 10%;
+
+  /* Primary — deep sage green (CTAs, brand) */
+  --primary:                  152 45% 35%;     /* ~#317B57 */
+  --primary-foreground:       140 30% 98%;
+
+  /* Secondary — light mint (badge, faint surface) */
+  --secondary:                145 40% 92%;     /* ~#DAF1E1 */
+  --secondary-foreground:     150 40% 15%;
+
+  /* Muted — soft sage (subtle backgrounds, dashed coming-soon cards) */
+  --muted:                    145 25% 90%;     /* ~#DCE8E0 */
+  --muted-foreground:         152 30% 22%;     /* ~#274836 — darker green-tinged body */
+
+  /* Accent — vibrant mint-green (gradient endpoint) */
+  --accent:                   160 50% 45%;     /* ~#3AB387 */
+  --accent-foreground:        140 30% 98%;
+
+  /* Status */
+  --destructive:              0 84.2% 60.2%;   /* ~#EF4444 */
+  --destructive-foreground:   0 0% 100%;
+  --success:                  152 60% 40%;     /* ~#29A36B */
+  --success-foreground:       140 30% 98%;
+
+  /* Lines + form */
+  --border:                   145 30% 85%;
+  --input:                    145 30% 88%;
+  --ring:                     152 45% 35%;
+
+  /* Sidebar (dashboard) */
+  --sidebar-background:       140 30% 98%;
+  --sidebar-foreground:       150 40% 25%;
+  --sidebar-primary:          152 45% 35%;
+  --sidebar-primary-foreground: 140 30% 98%;
+  --sidebar-accent:           145 40% 92%;
+  --sidebar-accent-foreground: 150 40% 15%;
+  --sidebar-border:           145 30% 85%;
+  --sidebar-ring:             152 45% 35%;
+
+  /* -------- Composed tokens -------- */
+  --radius:                   0.75rem;         /* 12px — primary corner radius */
+  --radius-md:                calc(var(--radius) - 2px);   /* 10px */
+  --radius-sm:                calc(var(--radius) - 4px);   /*  8px */
+  --radius-pill:              9999px;
+
+  --gradient-primary:         linear-gradient(135deg, hsl(152 45% 35%), hsl(160 50% 45%));
+  --gradient-hero:            linear-gradient(180deg, hsl(140 30% 98%) 0%, hsl(145 40% 95%) 100%);
+
+  --shadow-soft:              0 4px 20px -4px hsl(152 45% 35% / 0.15);
+  --shadow-card:              0 8px 32px -8px hsl(152 45% 35% / 0.12);
+  --shadow-card-hover:        0 12px 40px -8px hsl(152 45% 35% / 0.18);
+  --shadow-xl:                0 25px 50px -12px hsl(150 40% 10% / 0.25);
+
+  /* -------- Typography (foundations) -------- */
+  --font-sans:                'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif:               'Playfair Display', Georgia, serif;
+  --font-mono:                ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Sizing scale */
+  --text-xs:    0.75rem;   /* 12 */
+  --text-sm:    0.875rem;  /* 14 */
+  --text-base:  1rem;      /* 16 */
+  --text-lg:    1.125rem;  /* 18 */
+  --text-xl:    1.25rem;   /* 20 */
+  --text-2xl:   1.5rem;    /* 24 */
+  --text-3xl:   1.875rem;  /* 30 */
+  --text-4xl:   2.25rem;   /* 36 */
+  --text-5xl:   3rem;      /* 48 */
+  --text-6xl:   3.75rem;   /* 60 */
+
+  /* Spacing scale (Tailwind defaults; container padding = 2rem) */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+
+  /* Motion */
+  --ease-out:   cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast:   150ms;
+  --dur-base:   300ms;
+  --dur-slow:   600ms;
+}
+
+/* ============================================================
+   SEMANTIC ELEMENT STYLES
+   These reflect how the live site renders type. Note: although
+   tailwind.config.ts lists News Gothic MT, the canonical
+   src/index.css uses Inter + Playfair, with Playfair on h1–h6
+   AND `font-serif` everywhere — but most landing sections
+   actually apply `font-sans`. The Footer + Auth/Dashboard logo
+   wordmarks use `font-serif`. We honor both.
+   ============================================================ */
+
+html { font-size: 16px; }
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display — Playfair Display, used for the brand wordmark and emotive headings */
+.display-1, h1.display {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.display-2 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: clamp(1.875rem, 4vw, 3rem);
+  line-height: 1.1;
+}
+
+/* Headings — landing sections use sans (Inter) bold; dashboard/auth use serif. */
+h1 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--text-4xl);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+h2 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--text-3xl);
+  line-height: 1.2;
+}
+h3 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--text-xl);
+  line-height: 1.3;
+}
+h4 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--text-lg);
+  line-height: 1.35;
+}
+h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--text-base);
+  line-height: 1.4;
+}
+
+/* Wordmark utility — used for the "Ramazzini" brand mark in headers + footer */
+.wordmark {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+p {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: hsl(var(--muted-foreground));
+}
+
+.lead {
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  color: hsl(var(--muted-foreground));
+}
+
+small, .text-sm { font-size: var(--text-sm); }
+.text-xs { font-size: var(--text-xs); }
+
+code, pre, .mono { font-family: var(--font-mono); font-size: 0.95em; }
+
+/* ============================================================
+   SIGNATURE EFFECTS — components on the live site rely on these
+   ============================================================ */
+.gradient-text {
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-gradient { background: var(--gradient-hero); }
+
+.btn-gradient {
+  background: var(--gradient-primary);
+  color: hsl(var(--primary-foreground));
+  transition: transform var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+.btn-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+.card-elevated {
+  box-shadow: var(--shadow-card);
+  transition: transform var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+.card-elevated:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+@keyframes fade-up {
+  0%   { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.8; }
+}
+.animate-fade-up   { animation: fade-up   0.6s var(--ease-out) forwards; }
+.animate-pulse-soft{ animation: pulse-soft 2s var(--ease-in-out) infinite; }
+
+/* Pictographic primary chip — see HeroSection.tsx + AboutSection.tsx
+   The pattern of `rounded-lg bg-primary/10` w/ a centered Lucide icon. */
+.icon-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem; height: 2.5rem;
+  border-radius: var(--radius-md);
+  background: hsl(var(--primary) / 0.10);
+  color: hsl(var(--primary));
+}
+.icon-chip-lg { width: 3rem; height: 3rem; }
+.icon-chip-circle { border-radius: 9999px; }

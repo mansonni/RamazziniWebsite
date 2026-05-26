@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ramazzini — Industrial hygiene reports, hours instead of days.</title>
+  <meta name="description" content="Ramazzini turns lab reports and field notes into consultant-grade industrial hygiene reports. Built by CIHs. Save hours every week." />
+  <link rel="stylesheet" href="tokens.css" />
+  <link rel="stylesheet" href="fizzy.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Cabinet Grotesk as a Nourd-feel fallback (geometric, editorial sans) -->
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ============================================================
+       TOP NAV
+       ============================================================ -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="brand brand--wordmark" href="#top">
+        <span class="brand__name"><span data-cms="nav.brand">Ramazzini</span><span class="brand__ai" data-cms="nav.brandSuffix"> AI</span></span>
+      </a>
+
+      <nav class="nav__actions">
+        <a class="nav__link is-mobile-hide" href="#how" data-cms="nav.link1">How it Works</a>
+        <a class="nav__link is-mobile-hide" href="#features" data-cms="nav.link2">The Value</a>
+        <a class="nav__link is-mobile-hide" href="#roadmap" data-cms="nav.link3">The Roadmap</a>
+        <a class="nav__link is-mobile-hide" href="faq.html" data-cms="nav.link4">FAQ</a>
+        <a class="nav__link" href="#signin" data-action="signin" data-cms="nav.signin">Sign in</a>
+        <button class="btn fizzy has-price" type="button" data-action="join">
+          <span data-cms="nav.ctaLabel">Join Beta&nbsp;Test</span>
+          <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          <span class="price-pill" aria-hidden="true">$14.99<small>CAD</small></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero" id="top" data-cms-show="hero.visible">
+    <canvas class="hero__canvas" id="heroCanvas"></canvas>
+    <div class="hero__veil"></div>
+
+    <div class="container hero__inner">
+      <div class="hero__left">
+        <span class="hero__eyebrow">
+          <span class="dot"></span>
+          <span><span data-cms="hero.eyebrowPrefix">Private beta · </span><strong id="beta-eyebrow-count">25</strong><span data-cms="hero.eyebrowSuffix"> seats remaining</span></span>
+        </span>
+
+        <h1>
+          <span data-cms="hero.headlineLine1">Industrial Hygiene Reports</span><br/>
+          <span data-cms="hero.headlineLine2Prefix">in </span><span class="accent" data-cms="hero.headlineAccent">minutes</span><span data-cms="hero.headlineLine2Suffix">, not days.</span>
+        </h1>
+
+        <p class="hero__sub" data-cms-html="hero.subtitle">
+          Ramazzini analyzes your lab data, reads your field notes, and writes the
+          exposure assessment report — so you can get back to the <strong>actual work</strong>
+          of keeping people safe.
+        </p>
+
+        <div class="hero__ctas">
+          <button class="btn btn--lg btn--gradient fizzy has-price" type="button" data-action="join">
+            <span data-cms="hero.ctaPrimary">Join Beta Test</span>
+            <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            <span class="price-pill" aria-hidden="true">$14.99<small>CAD</small></span>
+          </button>
+          <button class="btn btn--lg btn--ghost" type="button" data-action="watch-demo">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <span data-cms="hero.ctaSecondary">Watch demo</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="hero__right">
+        <!-- Demo video panel — top aligns with the top of the H1 -->
+        <figure class="hero-demo" id="heroDemo" aria-label="Product demo video">
+          <div class="hero-demo__frame">
+            <video
+              id="heroDemoVideo"
+              class="hero-demo__video"
+              data-cms-src="hero.videoSrc"
+              src="assets/demo.mp4"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="auto"
+              controls
+              poster=""></video>
+          </div>
+          <button class="hero-demo__expand" type="button" data-action="expand-demo" aria-label="Expand demo to fullscreen">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg>
+            <span>Expand</span>
+          </button>
+        </figure>
+
+        <!-- Beta seat counter card -->
+        <aside class="beta-card" aria-label="Beta program status">
+        <div class="beta-card__head">
+          <span class="beta-card__label"><span class="dot"></span><span data-cms="hero.betaCardLabel">Founding cohort</span></span>
+          <span class="beta-card__chip" data-cms="hero.betaCardChip">25 founding seats</span>
+        </div>
+
+        <div class="counter">
+          <span class="counter__num" id="counterNum">25</span>
+          <span class="counter__meta">
+            <b data-cms="hero.betaCardMetaTop">seats remaining</b>
+            <span data-cms="hero.betaCardMetaBottom">of 25 founding members</span>
+          </span>
+        </div>
+
+        <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+        <div class="beta-card__avatars" id="userStack" hidden>
+          <span class="stack" id="userStackInner"><!-- avatars injected by app.js as seats fill --></span>
+          <p><b id="userStackCount">0 users</b> inside</p>
+        </div>
+
+        <button class="btn btn--gradient beta-card__cta fizzy has-price" type="button" data-action="join">
+          <span data-cms="hero.betaCardCta">Claim your seat</span>
+          <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          <span class="price-pill" aria-hidden="true">$14.99<small>CAD</small></span>
+        </button>
+        </aside>
+      </div>
+    </div>
+
+    <!-- Fullscreen demo lightbox -->
+    <div class="demo-lightbox" id="demoLightbox" hidden aria-hidden="true" role="dialog" aria-label="Product demo — fullscreen">
+      <button class="demo-lightbox__close" type="button" data-action="close-demo" aria-label="Close demo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="demo-lightbox__frame">
+        <video id="demoLightboxVideo" src="assets/demo.mp4" controls playsinline></video>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       HOW IT WORKS — three steps with animated demo
+       ============================================================ -->
+  <section class="how" id="how" data-cms-show="how.visible">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-cms="how.eyebrow">How it works</span>
+        <h2 data-cms-html="how.title">Three simple steps. <em>Get Your Afternoons Back!</em></h2>
+        <p data-cms="how.subtitle">Drop in the lab report. Add a few field notes. Ramazzini does the exposure assessment write-up — formatted, sourced, and ready to review.</p>
+      </div>
+
+      <div class="how__grid">
+        <div class="how__steps">
+          <div class="step is-active reveal" data-step="0">
+            <span class="step__num" data-cms="how.steps.0.num">01</span>
+            <h3 data-cms="how.steps.0.title">Upload your lab report</h3>
+            <p data-cms="how.steps.0.body">PDF, CSV, or pasted text. Ramazzini parses each analyte, exposure limit, and sampling method automatically — no template wrangling.</p>
+          </div>
+          <div class="step reveal" data-step="1" data-delay="1">
+            <span class="step__num" data-cms="how.steps.1.num">02</span>
+            <h3 data-cms="how.steps.1.title">Add your contextual notes</h3>
+            <p data-cms="how.steps.1.body">Walk-throughs, worker observations, control measures in place, voice memos. Drop in whatever you have — Ramazzini reconciles it with the data.</p>
+          </div>
+          <div class="step reveal" data-step="2" data-delay="2">
+            <span class="step__num" data-cms="how.steps.2.num">03</span>
+            <h3 data-cms="how.steps.2.title">Let Ramazzini do its thing</h3>
+            <p data-cms="how.steps.2.body">A polished exposure assessment report with findings, recommendations and citations generated in a couple of minutes. Review, edit and send.</p>
+          </div>
+        </div>
+
+        <div class="how__demo reveal" data-delay="1">
+          <div class="demo-window">
+            <div class="demo-window__bar">
+              <span class="lights"><i></i><i></i><i></i></span>
+              <span class="title" id="demoTitle">ramazzini.app</span>
+            </div>
+            <div class="demo-window__body" id="demoBody">
+
+              <!-- mock 1: upload -->
+              <div class="mock mock-1 is-active" data-mock="0">
+                <div class="mock-1__drop">
+                  <div class="mock-1__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                  </div>
+                  <b>Drop your lab report here</b>
+                  <span>PDF · CSV · XLSX  ·  any accredited lab format</span>
+                </div>
+                <div class="mock-1__file">
+                  <span class="fi">PDF</span>
+                  <div>
+                    <b>Site-B-Welding-Q3.pdf</b><br/>
+                    <span>87 analytes  ·  parsed in 4.2s</span>
+                  </div>
+                  <span class="ok">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                </div>
+              </div>
+
+              <!-- mock 2: contextual notes -->
+              <div class="mock mock-2" data-mock="1">
+                <div class="mock-2__row">
+                  <div class="mock-2__pad">
+                    <small>Field notes &middot; Site B, Bay 3</small>
+                    <p>Operator using MIG welder on stainless, 6-hr shift, local exhaust ventilation present but obstructed at the right-hand workstation. Half-face APR worn intermittently.<span class="mock-2__caret"></span></p>
+                  </div>
+                </div>
+                <div class="mock-2__tags">
+                  <span class="tag"><i></i>Hexavalent chromium</span>
+                  <span class="tag"><i></i>Nickel fume</span>
+                  <span class="tag"><i></i>LEV — partial</span>
+                  <span class="tag"><i></i>APR — discretionary</span>
+                  <span class="tag"><i></i>O. Reg 833</span>
+                  <span class="tag"><i></i>ACGIH TLV-TWA</span>
+                </div>
+              </div>
+
+              <!-- mock 3: generation -->
+              <div class="mock mock-3" data-mock="2">
+                <div class="mock-3__head">
+                  <span class="spin"></span>
+                  <b>Generating report</b>
+                  <span id="genPct">94%</span>
+                </div>
+                <div class="mock-3__paper">
+                  <b class="title">Exposure Assessment — Site B, Welding Operations</b>
+                  <span class="line"></span>
+                  <span class="line"></span>
+                  <span class="line"></span>
+                  <span class="line"></span>
+                  <span class="line"></span>
+                  <span class="line"></span>
+                  <div class="chip-row">
+                    <span class="chip">Cited · NIOSH 7304, O. Reg 833</span>
+                    <span class="chip">12 findings</span>
+                    <span class="chip">4 recs</span>
+                  </div>
+                  <div class="mock-3__check">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FEATURES — 3-column benefits grid
+       ============================================================ -->
+  <section class="features" id="features" data-cms-show="features.visible">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-cms="features.eyebrow">The Value</span>
+        <h2 data-cms-html="features.title">Expert Reports. <em>A couple of minutes.</em></h2>
+        <p data-cms="features.subtitle">Built and validated by Certified Industrial Hygienists. Tuned for the reports you already write — just done in time to make it home for dinner.</p>
+      </div>
+
+      <div class="features__grid" data-cms-list="features.items">
+        <template>
+          <div class="feat reveal" data-cms-stagger>
+            <div class="feat__icon" aria-hidden="true" data-cms-html="icon"></div>
+            <h3 data-cms-html="title"></h3>
+            <p data-cms="body"></p>
+            <span class="feat__stat" data-cms-html="stat"></span>
+          </div>
+        </template>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FUTURE / ROADMAP
+       ============================================================ -->
+  <section class="future" id="roadmap" data-cms-show="roadmap.visible">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-cms="roadmap.eyebrow">The roadmap</span>
+        <h2 data-cms-html="roadmap.title">What we've got <em>cookin'</em>.</h2>
+        <p data-cms="roadmap.subtitle">Founding members vote on what we build first. Here's a peek at what's already on the stove — and a glimpse of what we're holding close.</p>
+      </div>
+
+      <div class="roadmap" data-cms-list="roadmap.items">
+        <template>
+          <div class="road reveal" data-cms-stagger data-cms-class="secret:road--secret">
+            <div class="road__icon" data-cms-html="icon"></div>
+            <span class="road__chip"><span class="dot"></span><span data-cms="chip"></span></span>
+            <h3 data-cms="title"></h3>
+            <p data-cms="body"></p>
+          </div>
+        </template>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FINAL CTA — clean panel, no shader backdrop
+       ============================================================ -->
+  <section class="final-cta" data-cms-show="finalCta.visible">
+    <div class="container">
+      <div class="final-cta__panel final-cta__panel--flat">
+        <div class="final-cta__inner">
+          <h2 data-cms-html="finalCta.title">Save time. Save money. Trust Ramazzini. Trust the <em>Transformation.</em></h2>
+          <p data-cms="finalCta.subtitle">25 founding seats. The first cohort closes when the counter hits zero.</p>
+          <div class="final-cta__ctas">
+            <button class="btn btn--xl btn--gradient fizzy has-price" type="button" data-action="join">
+              <span data-cms="finalCta.ctaPrimary">Join Beta Test</span>
+              <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              <span class="price-pill" aria-hidden="true">$14.99<small>CAD</small></span>
+            </button>
+            <button class="btn btn--xl btn--ghost" type="button" data-action="watch-demo">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <span data-cms="finalCta.ctaSecondary">Watch demo</span>
+            </button>
+          </div>
+          <p class="final-cta__hint">
+            <b id="finalCount">25</b> <span data-cms="finalCta.hint">of 25 seats remain  ·  secure checkout via Stripe</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div data-cms="footer.copyright">© 2026 Ramazzini AI</div>
+      <nav class="footer__links">
+        <a href="privacy.html">Privacy</a>
+        <a href="privacy.html#terms">Terms</a>
+        <a href="faq.html">Beta FAQ</a>
+        <a href="mailto:support@ramazziniai.com" data-cms-mailto="footer.contactEmail">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JOIN BETA MODAL — Stripe + Google sign-in stubs
+       Developers: see HANDOFF.md for backend wiring.
+       ============================================================ -->
+  <div class="join-modal" id="joinModal" aria-hidden="true" role="dialog" aria-labelledby="joinTitle">
+    <div class="join-modal__panel">
+      <button class="join-modal__close" id="joinClose" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+
+      <div class="join-modal__head">
+        <span class="join-modal__seat-chip">
+          <span class="dot"></span>
+          <b id="joinSeatCount">25</b>&nbsp;of&nbsp;25 seats remaining
+        </span>
+        <h2 id="joinTitle">Claim your <em>founding seat</em>.</h2>
+        <p>One-time payment. Lifetime founding-member discount. Influence what we build next.</p>
+      </div>
+
+      <div class="join-modal__price">
+        <div>
+          <span class="join-modal__amount"><span class="cur">$</span>14<span class="cents">.99</span></span>
+          <small>CAD · one-time</small>
+        </div>
+        <ul class="join-modal__perks">
+          <li><span class="check">✓</span> Full beta access and future beta products</li>
+          <li><span class="check">✓</span> Founding-member badge &amp; tier</li>
+          <li><span class="check">✓</span> Significant discount on the v1 subscription</li>
+          <li><span class="check">✓</span> Influence the shape of future products</li>
+        </ul>
+      </div>
+
+      <div class="join-modal__cta">
+        <button class="join-btn join-btn--stripe" id="joinStripeBtn" type="button">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <rect width="24" height="24" rx="5" fill="#635BFF"/>
+            <path fill="white" d="M11.6 9.7c0-.7.6-1 1.5-1 1.3 0 3 .4 4.3 1.1V6.3c-1.4-.6-2.9-.8-4.3-.8-3.5 0-5.9 1.8-5.9 4.9 0 4.7 6.5 4 6.5 6 0 .8-.7 1-1.7 1-1.4 0-3.3-.6-4.7-1.4v3.6c1.6.7 3.2 1 4.7 1 3.6 0 6.1-1.8 6.1-4.9.1-5.1-6.5-4.3-6.5-6z"/>
+          </svg>
+          Pay $14.99 with Stripe
+        </button>
+        <button class="join-btn join-btn--google" id="joinGoogleBtn" type="button">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path fill="#4285F4" d="M23 12.27c0-.79-.07-1.55-.2-2.27H12v4.3h6.18c-.27 1.43-1.08 2.65-2.3 3.46v2.88h3.72C21.78 18.66 23 15.7 23 12.27z"/>
+            <path fill="#34A853" d="M12 23c3.1 0 5.7-1.03 7.6-2.78l-3.72-2.88c-1.03.7-2.35 1.1-3.88 1.1-2.98 0-5.5-2.01-6.4-4.71H1.76v2.96A11 11 0 0 0 12 23z"/>
+            <path fill="#FBBC04" d="M5.6 13.73a6.6 6.6 0 0 1 0-3.46V7.31H1.76a11 11 0 0 0 0 9.38l3.84-2.96z"/>
+            <path fill="#EA4335" d="M12 5.38c1.69 0 3.2.58 4.39 1.72l3.29-3.29C17.69 1.97 15.1 1 12 1A11 11 0 0 0 1.76 7.31l3.84 2.96C6.5 7.4 9.02 5.38 12 5.38z"/>
+          </svg>
+          Continue with Google
+        </button>
+        <p class="join-modal__legal">
+          You'll be redirected to a secure Stripe checkout.
+          By continuing you agree to our <a href="privacy.html">privacy policy</a> and <a href="privacy.html#terms">terms</a>.
+        </p>
+      </div>
+    </div>
+    <div class="join-modal__backdrop" id="joinBackdrop"></div>
+  </div>
+
+  <!-- ============================================================
+       SIGN-IN MODAL — create account or continue with Google
+       ============================================================ -->
+  <div class="join-modal sign-modal" id="signinModal" aria-hidden="true" role="dialog" aria-labelledby="signinTitle">
+    <div class="join-modal__panel">
+      <button class="join-modal__close" id="signinClose" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+
+      <div class="join-modal__head">
+        <h2 id="signinTitle"><span id="signinHeading">Welcome <em>back.</em></span></h2>
+        <p id="signinSub">Sign in to your Ramazzini beta account.</p>
+      </div>
+
+      <!-- Tab toggle: Sign in / Create account -->
+      <div class="signin-tabs" role="tablist">
+        <button class="signin-tab is-on" role="tab" data-mode="signin" type="button">Sign in</button>
+        <button class="signin-tab"       role="tab" data-mode="signup" type="button">Create account</button>
+      </div>
+
+      <form class="signin-form" id="signinForm" novalidate>
+        <label class="signin-field" data-only="signup">
+          <span>Full name</span>
+          <input type="text" name="name" autocomplete="name" placeholder="Jane Doe" />
+        </label>
+        <label class="signin-field">
+          <span>Work email</span>
+          <input type="email" name="email" autocomplete="email" placeholder="you@company.com" required />
+        </label>
+        <label class="signin-field">
+          <span>Password</span>
+          <input type="password" name="password" autocomplete="current-password" placeholder="At least 8 characters" required minlength="8" />
+        </label>
+        <button class="join-btn join-btn--stripe" type="submit" id="signinSubmit">
+          <span id="signinSubmitLabel">Sign in</span>
+        </button>
+      </form>
+
+      <div class="signin-divider"><span>or</span></div>
+
+      <button class="join-btn join-btn--google" id="signinGoogleBtn" type="button">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path fill="#4285F4" d="M23 12.27c0-.79-.07-1.55-.2-2.27H12v4.3h6.18c-.27 1.43-1.08 2.65-2.3 3.46v2.88h3.72C21.78 18.66 23 15.7 23 12.27z"/>
+          <path fill="#34A853" d="M12 23c3.1 0 5.7-1.03 7.6-2.78l-3.72-2.88c-1.03.7-2.35 1.1-3.88 1.1-2.98 0-5.5-2.01-6.4-4.71H1.76v2.96A11 11 0 0 0 12 23z"/>
+          <path fill="#FBBC04" d="M5.6 13.73a6.6 6.6 0 0 1 0-3.46V7.31H1.76a11 11 0 0 0 0 9.38l3.84-2.96z"/>
+          <path fill="#EA4335" d="M12 5.38c1.69 0 3.2.58 4.39 1.72l3.29-3.29C17.69 1.97 15.1 1 12 1A11 11 0 0 0 1.76 7.31l3.84 2.96C6.5 7.4 9.02 5.38 12 5.38z"/>
+        </svg>
+        Continue with Google
+      </button>
+
+      <p class="join-modal__legal">
+        By continuing you agree to our <a href="privacy.html">privacy policy</a> and <a href="privacy.html#terms">terms</a>.
+        <br/><span id="signinSwapHint">No account yet? <a href="#" data-swap="signup">Create one</a>.</span>
+      </p>
+    </div>
+    <div class="join-modal__backdrop" id="signinBackdrop"></div>
+  </div>
+
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
+  <script src="shaders.js"></script>
+  <script src="fizzy.js"></script>
+  <script type="application/json" id="cms-content">
+{
+  "meta": {
+    "title": "Ramazzini — Industrial hygiene reports, hours instead of days.",
+    "description": "Ramazzini turns lab reports and field notes into consultant-grade industrial hygiene reports. Built by CIHs. Save hours every week."
+  },
+  "theme": {
+    "background": "#0b0d0c",
+    "primary": "#7BD389",
+    "accent": "#7BD389"
+  },
+  "nav": {
+    "brand": "Ramazzini",
+    "brandSuffix": " AI",
+    "link1": "How it Works",
+    "link2": "The Value",
+    "link3": "The Roadmap",
+    "link4": "FAQ",
+    "signin": "Sign in",
+    "ctaLabel": "Join Beta Test"
+  },
+  "pricing": {
+    "amount": "14.99",
+    "currency": "CAD"
+  },
+  "seats": {
+    "total": 25,
+    "remaining": 25
+  },
+  "hero": {
+    "visible": true,
+    "eyebrowPrefix": "Private beta · ",
+    "eyebrowSuffix": " seats remaining",
+    "headlineLine1": "Industrial Hygiene Reports",
+    "headlineLine2Prefix": "in ",
+    "headlineAccent": "minutes",
+    "headlineLine2Suffix": ", not days.",
+    "subtitle": "Ramazzini analyzes your lab data, reads your field notes, and writes the exposure assessment report — so you can get back to the <strong>actual work</strong> of keeping people safe.",
+    "ctaPrimary": "Join Beta Test",
+    "ctaSecondary": "Watch demo",
+    "videoSrc": "assets/demo.mp4",
+    "betaCardLabel": "Founding cohort",
+    "betaCardChip": "25 founding seats",
+    "betaCardMetaTop": "seats remaining",
+    "betaCardMetaBottom": "of 25 founding members",
+    "betaCardCta": "Claim your seat"
+  },
+  "how": {
+    "visible": true,
+    "eyebrow": "How it works",
+    "title": "Three simple steps. <em>Get Your Afternoons Back!</em>",
+    "subtitle": "Drop in the lab report. Add a few field notes. Ramazzini does the exposure assessment write-up — formatted, sourced, and ready to review.",
+    "steps": [
+      {
+        "num": "01",
+        "title": "Upload your lab report",
+        "body": "PDF, CSV, or pasted text. Ramazzini parses each analyte, exposure limit, and sampling method automatically — no template wrangling."
+      },
+      {
+        "num": "02",
+        "title": "Add your contextual notes",
+        "body": "Walk-throughs, worker observations, control measures in place, voice memos. Drop in whatever you have — Ramazzini reconciles it with the data."
+      },
+      {
+        "num": "03",
+        "title": "Let Ramazzini do its thing",
+        "body": "A polished exposure assessment report with findings, recommendations and citations generated in a couple of minutes. Review, edit and send."
+      }
+    ]
+  },
+  "features": {
+    "visible": true,
+    "eyebrow": "The Value",
+    "title": "Expert Reports. <em>A couple of minutes.</em>",
+    "subtitle": "Built and validated by Certified Industrial Hygienists. Tuned for the reports you already write — just done in time to make it home for dinner.",
+    "items": [
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'/><polyline points='12 6 12 12 16 14'/></svg>",
+        "title": "Hours back, every week",
+        "body": "A 30-page exposure assessment report that took your team a day or two now lands in under an hour. Fewer late nights. More time back!",
+        "stat": "⏱  <b>6–10 hrs</b> · saved per report"
+      },
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2L2 7l10 5 10-5-10-5z'/><polyline points='2 17 12 22 22 17'/><polyline points='2 12 12 17 22 12'/></svg>",
+        "title": "Modeled by CIHs &amp; SIHs",
+        "body": "Trained on the judgement of Certified Industrial Hygienists, Senior IHs, and the junior staff who had plenty of experience drafting exposure assessment reports.",
+        "stat": "✓  <b>CIH-reviewed</b> language &amp; structure"
+      },
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><line x1='12' y1='1' x2='12' y2='23'/><path d='M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'/></svg>",
+        "title": "Thousands back, every year",
+        "body": "For an independent consultant or a team this could be tens of thousands in recovered margin annually — without hiring, without adding overhead, without dropping your standards.",
+        "stat": "$  <b>$10k–$60k or more</b> · per year depending on volume"
+      },
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/><polyline points='14 2 14 8 20 8'/><line x1='9' y1='13' x2='15' y2='13'/><line x1='9' y1='17' x2='15' y2='17'/></svg>",
+        "title": "Every analyte",
+        "body": "Currently we are referencing ACGIH TLVs, O. Reg 833, and OSHA. Ramazzini will start to automatically apply the right contaminants with full citation, exactly as your reviewer expects, as our library grows.",
+        "stat": "📎  <b>Jurisdictional Reference</b> · cited inline"
+      },
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/></svg>",
+        "title": "Your data stays yours",
+        "body": "Sensitive lab data, field notes, and final reports stay inside the Ramazzini ecosystem. No training on your clients' work, no leakage, no surprises in the next audit.",
+        "stat": "🔒  <b>Closed loop</b> · no third-party training"
+      },
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z'/></svg>",
+        "title": "Made for the work, not the hype",
+        "body": "Ramazzini doesn't redesign your workflow — it removes the tedious and technical parts. The judgement stays with you. The typing, the formatting, the citation hunting? Gone. We still encourage you to review the output — you're the smart one, after all.",
+        "stat": "✨  <b>Less typing</b> · more hygiene"
+      }
+    ]
+  },
+  "roadmap": {
+    "visible": true,
+    "eyebrow": "The roadmap",
+    "title": "What we've got <em>cookin'</em>.",
+    "subtitle": "Founding members vote on what we build first. Here's a peek at what's already on the stove — and a glimpse of what we're holding close.",
+    "items": [
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 18v-6a9 9 0 0 1 18 0v6'/><path d='M21 19a2 2 0 0 1-2 2h-1v-7h3v5zM3 19a2 2 0 0 0 2 2h1v-7H3v5z'/></svg>",
+        "chip": "Q2 – Q3",
+        "title": "Noise reports",
+        "body": "Noise exposure assessment reports based on noise dosimetry data — Leq, peak, dose and recommendations based on legislation.",
+        "secret": false
+      },
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 7 9 18 4 13'/><path d='M14 4l-1 1'/><path d='M19 9l1-1'/></svg>",
+        "chip": "Q3 – Q4",
+        "title": "Chemicals report v2",
+        "body": "Expanded analyte library, smarter SEG grouping, mixed-exposure recommendations, and reviewer-comments threading.",
+        "secret": false
+      },
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 3v18h18'/><path d='M7 14l4-4 4 4 5-5'/></svg>",
+        "chip": "Q4",
+        "title": "Bayesian Statistical Analysis",
+        "body": "Optional AIHA-style Bayesian exposure judgement on every SEG, with priors you control — for the reports that need that level of rigour.",
+        "secret": false
+      },
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='9'/><path d='M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18'/></svg>",
+        "chip": "TBD",
+        "title": "Comparative sector benchmarks",
+        "body": "Anonymous, opt-in benchmarks across sectors — see how your facility's exposures compare to industry, regional, and process peers.",
+        "secret": false
+      },
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 12h3l2-6 4 12 2-6h7'/></svg>",
+        "chip": "TBD",
+        "title": "Indoor air quality reports",
+        "body": "End-to-end IAQ — CO₂, VOCs, PM, temperature, RH — with HVAC context, source identification, and remediation framing.",
+        "secret": false
+      },
+      {
+        "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='3'/><circle cx='12' cy='12' r='9' stroke-dasharray='2 3'/></svg>",
+        "chip": "And much more",
+        "title": "The secret menu",
+        "body": "We're not giving away everything. Founding members get the first look, and a vote on what we build next. :)",
+        "secret": true
+      }
+    ]
+  },
+  "finalCta": {
+    "visible": true,
+    "title": "Save time. Save money. Trust Ramazzini. Trust the <em>Transformation.</em>",
+    "subtitle": "25 founding seats. The first cohort closes when the counter hits zero.",
+    "ctaPrimary": "Join Beta Test",
+    "ctaSecondary": "Watch demo",
+    "hint": "of 25 seats remain  ·  secure checkout via Stripe"
+  },
+  "footer": {
+    "copyright": "© 2026 Ramazzini AI",
+    "contactEmail": "support@ramazziniai.com"
+  },
+  "faq": [
+    {
+      "group": "Program basics & eligibility",
+      "question": "What is this beta program about?",
+      "answer": "<p>It's an opportunity for early adopters to try Ramazzini and help shape how the software is built before public release. You won't just be testing — you'll be influencing the future of the field of industrial hygiene.</p>"
+    },
+    {
+      "group": "Program basics & eligibility",
+      "question": "Who can join?",
+      "answer": "<p>Industrial hygienists are the ideal fit, but other health and safety professionals are welcome too — anyone willing to put the software through real work and give meaningful feedback.</p>"
+    },
+    {
+      "group": "Program basics & eligibility",
+      "question": "How long does the beta last?",
+      "answer": "<p>12 weeks for the chemical reporting beta. We may extend or open new betas for noise, IAQ, and other report types as those roll in.</p>"
+    },
+    {
+      "group": "Program basics & eligibility",
+      "question": "Why does the beta test cost money?",
+      "answer": "<p>A small fee shows there's genuine interest in the product, and it validates the feedback we get back. The industry has seen too many free betas where users withhold negative feedback to stay polite.</p><p>Paid users tell us the truth. They show the market that Ramazzini is something professionals are willing to spend on — and in this era, free access isn't a strong indicator of demand.</p>"
+    },
+    {
+      "group": "Expectations & commitment",
+      "question": "What is expected of me?",
+      "answer": "<p>Active use of the software, completing the tasks we send your way, and honest feedback. Plan on roughly <strong>1–2 hours per week</strong>. That's it.</p>"
+    },
+    {
+      "group": "Expectations & commitment",
+      "question": "What should I do if I find a bug?",
+      "answer": "<p>Use the in-app reporting tool, the feedback form, or email us directly. Every bug report goes straight to the team that can fix it.</p>"
+    },
+    {
+      "group": "Expectations & commitment",
+      "question": "Is the software stable?",
+      "answer": "<p>It's a beta — expect bugs, including occasional big ones, and the possibility of downtime while we patch issues or implement feedback. If \"polished v1\" is what you need, the public release is the right entry point.</p>"
+    },
+    {
+      "group": "Incentives & rewards",
+      "question": "What do I get in return?",
+      "answer": "<p>A founding-member badge and lifetime access tier on your profile, a significant discount on the final product subscription, and raffles for some genuinely cool gear along the way.</p>"
+    },
+    {
+      "group": "Incentives & rewards",
+      "question": "Do I get free access after the beta?",
+      "answer": "<p>Active participants who give detailed feedback are usually rewarded with extended free access. At some point, though, every account converts to a paid subscription — that's how we keep building.</p>"
+    },
+    {
+      "group": "Technical support & privacy",
+      "question": "Will my data be safe?",
+      "answer": "<p>Yes — data security is prioritized, even though this is a pre-release product. <strong>Lab reports, contextual data, and generated reports never leave the Ramazzini ecosystem.</strong> No third-party training, no leakage.</p>"
+    },
+    {
+      "group": "Technical support & privacy",
+      "question": "Will there be technical support?",
+      "answer": "<p>Yes. Submit problems through the feedback system and we'll get back to you — please allow a couple of days for a response. We read everything.</p>"
+    }
+  ]
+}
+
+</script>
+  <script src="cms-loader.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

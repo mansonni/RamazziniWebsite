@@ -1,0 +1,333 @@
+/* ============================================================
+   Ramazzini Control Panel — styles
+   Dark, minimal, opinionated. No frameworks.
+   ============================================================ */
+:root {
+  --bg: #0c0f0d;
+  --panel: #14181a;
+  --panel-2: #1a1f22;
+  --border: #232a2d;
+  --muted: #8a9591;
+  --fg: #e7efe9;
+  --primary: #7BD389;
+  --primary-ink: #0a1b10;
+  --danger: #ff7a7a;
+  --warn: #ffc870;
+  --link: #9be8a7;
+  --radius: 12px;
+  --shadow: 0 24px 64px -28px rgba(0,0,0,0.6);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg); }
+body { min-height: 100vh; font-size: 14px; line-height: 1.5; }
+a { color: var(--link); }
+h1, h2, h3, h4 { margin: 0 0 12px; font-weight: 600; letter-spacing: -0.01em; }
+h1 { font-size: 28px; }
+h2 { font-size: 20px; }
+h3 { font-size: 15px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 24px; }
+p { margin: 0 0 12px; color: var(--muted); }
+code { background: var(--panel-2); padding: 2px 6px; border-radius: 4px; font-size: 12px; }
+.hint { font-size: 12px; color: var(--muted); margin-top: -4px; }
+
+/* ===== Lock screen ============================================ */
+.lock {
+  position: fixed; inset: 0;
+  display: grid; place-items: center;
+  z-index: 1000;
+  background:
+    radial-gradient(60% 60% at 50% 30%, rgba(123,211,137,0.10), transparent 70%),
+    var(--bg);
+}
+.lock[hidden] { display: none; }
+.lock__panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 40px 36px;
+  width: min(420px, 90vw);
+  box-shadow: var(--shadow);
+}
+.lock__brand {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.12em;
+  margin-bottom: 24px;
+}
+.lock__dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 12px var(--primary);
+}
+.lock__hint { font-size: 13px; margin-top: 16px; min-height: 20px; }
+.lock__hint.is-error { color: var(--danger); }
+
+/* ===== Fields ================================================= */
+.field { display: block; margin-bottom: 14px; }
+.field > span {
+  display: block; font-size: 12px; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px;
+}
+.field input[type="text"],
+.field input[type="email"],
+.field input[type="password"],
+.field input[type="number"],
+.field input[type="url"],
+.field textarea,
+.field select {
+  width: 100%;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--fg);
+  padding: 10px 12px;
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 150ms, box-shadow 150ms;
+}
+.field textarea { min-height: 88px; resize: vertical; font-family: inherit; }
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(123,211,137,0.15);
+}
+.field--row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.field--inline { display: flex; align-items: center; gap: 12px; }
+.field--inline > span { margin: 0; }
+
+/* checkbox toggle */
+.toggle {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 8px 12px;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+.toggle input { accent-color: var(--primary); }
+
+/* color picker row */
+.color-row {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+.color-row input[type="color"] {
+  width: 36px; height: 36px; border: 0; padding: 0;
+  background: transparent; cursor: pointer;
+}
+.color-row input[type="text"] {
+  flex: 1; background: transparent; border: 0; color: var(--fg);
+  font: inherit; outline: none; font-family: ui-monospace, monospace; font-size: 13px;
+}
+
+/* ===== Buttons ================================================ */
+.btn {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: var(--panel-2);
+  color: var(--fg);
+  padding: 9px 16px;
+  border-radius: 8px;
+  font: inherit; font-size: 13px; font-weight: 500;
+  cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: background 120ms, border-color 120ms, transform 80ms;
+}
+.btn:hover { background: var(--border); }
+.btn:active { transform: translateY(1px); }
+.btn--primary { background: var(--primary); color: var(--primary-ink); border-color: var(--primary); font-weight: 600; }
+.btn--primary:hover { background: #92dfa0; }
+.btn--ghost { background: transparent; }
+.btn--ghost:hover { background: var(--panel); }
+.btn--danger { color: var(--danger); }
+.btn--danger:hover { background: rgba(255,122,122,0.1); border-color: var(--danger); }
+.btn--small { padding: 6px 10px; font-size: 12px; }
+.btn--full { width: 100%; justify-content: center; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ===== Top bar + layout ======================================= */
+.topbar {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 20px;
+}
+.topbar__brand { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
+.topbar__brand strong { color: var(--fg); font-weight: 600; }
+.topbar__actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: calc(100vh - 53px);
+}
+.side {
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  padding: 16px 12px;
+  position: sticky; top: 53px;
+  height: calc(100vh - 53px);
+  overflow-y: auto;
+}
+.side__item {
+  display: block;
+  padding: 9px 12px;
+  border-radius: 8px;
+  color: var(--muted);
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 13px;
+  border: 0;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  transition: background 100ms, color 100ms;
+}
+.side__item:hover { background: var(--panel-2); color: var(--fg); }
+.side__item.is-on { background: var(--panel-2); color: var(--primary); }
+.content {
+  padding: 32px 40px 80px;
+  max-width: 880px;
+}
+.content h1 { margin-bottom: 8px; }
+.content > .lede { color: var(--muted); margin-bottom: 24px; font-size: 15px; }
+
+/* ===== Cards (for list items: roadmap/features/FAQ) =========== */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 14px;
+}
+.card__head {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.card__head h4 {
+  margin: 0; font-size: 14px; font-weight: 600;
+}
+.card__actions { display: flex; gap: 6px; }
+
+.add-row {
+  display: flex; gap: 8px; margin-top: 12px;
+}
+.section {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+
+/* ===== Image picker =========================================== */
+.image-picker {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 12px;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.image-picker__preview {
+  width: 120px; height: 80px;
+  background: var(--bg);
+  border-radius: 6px;
+  border: 1px dashed var(--border);
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+.image-picker__controls { flex: 1; }
+.image-picker__controls .field { margin-bottom: 8px; }
+.image-picker__controls .btn { margin-top: 4px; }
+.image-picker__status { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+/* ===== Dialog ================================================= */
+.dialog {
+  position: fixed; inset: 0; z-index: 100;
+  display: grid; place-items: center;
+}
+.dialog[hidden] { display: none; }
+.dialog__backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+}
+.dialog__panel {
+  position: relative;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 32px;
+  width: min(560px, 92vw);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow);
+  z-index: 1;
+}
+.dialog__intro { font-size: 13px; }
+.dialog__actions {
+  display: flex; gap: 8px; justify-content: flex-end;
+  margin-top: 20px;
+}
+
+/* ===== Toast ================================================== */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 18px;
+  box-shadow: var(--shadow);
+  font-size: 13px;
+  z-index: 200;
+  animation: toastIn 200ms ease-out;
+}
+.toast.is-success { border-color: var(--primary); }
+.toast.is-error { border-color: var(--danger); color: var(--danger); }
+@keyframes toastIn {
+  from { transform: translate(-50%, 12px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+/* ===== Publish badge ========================================== */
+#publishLabel[data-state="busy"]::after {
+  content: '…';
+}
+.dirty-dot {
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--warn);
+  margin-left: 8px;
+  vertical-align: middle;
+  animation: pulseDirty 1.2s infinite ease-in-out;
+}
+@keyframes pulseDirty {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* ===== Responsive ============================================= */
+@media (max-width: 800px) {
+  .layout { grid-template-columns: 1fr; }
+  .side {
+    position: static; height: auto;
+    display: flex; gap: 4px; overflow-x: auto;
+    border-right: 0; border-bottom: 1px solid var(--border);
+  }
+  .side__item { white-space: nowrap; }
+  .content { padding: 24px 16px 80px; }
+  .topbar { flex-wrap: wrap; }
+  .field--row { grid-template-columns: 1fr; }
+}
