@@ -338,32 +338,11 @@
     }
     refreshSeatCount();
 
-    // Stripe Checkout — dev: replace with real fetch to /api/checkout
-    const stripeBtnOriginal = stripeBtn.innerHTML;
-    stripeBtn.addEventListener('click', async () => {
+    // Stripe Checkout — hosted Payment Link
+    stripeBtn.addEventListener('click', () => {
       stripeBtn.disabled = true;
       stripeBtn.innerHTML = stripeBtn.innerHTML.replace(/Pay \$14\.99 with Stripe/, 'Redirecting\u2026');
-      try {
-        // === REAL IMPLEMENTATION (uncomment when backend is wired) ===
-        // const res = await fetch(API.CHECKOUT_ENDPOINT, {
-        //   method: 'POST',
-        //   headers: { 'Content-Type': 'application/json' },
-        //   body: JSON.stringify({ priceId: API.PUBLIC_STRIPE_PRICE_ID }),
-        // });
-        // const { url } = await res.json();
-        // window.location.href = url;
-        // === END REAL IMPLEMENTATION ===
-
-        // === FRONTEND DEMO ===  remove once backend is live
-        await new Promise(r => setTimeout(r, 900));
-        simulatePaymentSuccess();
-      } catch (err) {
-        console.error('Checkout failed', err);
-        alert('Could not start checkout. Please try again or email hello@ramazzini.app');
-      } finally {
-        stripeBtn.disabled = false;
-        stripeBtn.innerHTML = stripeBtnOriginal;
-      }
+      window.location.href = 'https://buy.stripe.com/dRmbJ11vugR2gO17ouaEE01';
     });
 
     // Google OAuth — dev: replace with real redirect to /auth/google
