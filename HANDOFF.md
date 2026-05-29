@@ -1,13 +1,21 @@
 # Ramazzini — Developer Handoff
 
 This is the marketing landing page for the Ramazzini private beta. It's a static
-HTML/CSS/JS site (no build step, no framework) that needs **three** backend
-endpoints wired up before the **Join Beta Test** flow becomes real:
+HTML/CSS/JS site (no build step, no framework).
 
-1. **Seats counter** — keep the "X of 25 seats remaining" pill live.
-2. **Stripe Checkout** — charge $14.99 USD one-time for a beta seat.
-3. **Google OAuth** — let buyers sign in with Google so we can attach the
-   purchase to a user.
+> **Checkout update:** The **Join Beta Test** CTA now hands off to the Ramazzini
+> app (`https://app.ramazziniai.com/billing`, set as `APP_CHECKOUT_URL` in
+> `app.js`). The visitor signs in / creates an account in the app and completes
+> the authenticated **$14.99 CAD** one-time Stripe checkout there; the app's
+> webhook grants beta access to that account. This means the marketing site no
+> longer needs its own Stripe Checkout endpoint or Google OAuth (sections 1 and 2
+> below are superseded and kept only for historical reference). The old standalone
+> Stripe Payment Link was removed because it could charge a visitor without ever
+> granting them access in the app.
+
+The one piece still worth wiring on the marketing site:
+
+1. **Seats counter** — keep the "X of 25 seats remaining" pill live (cosmetic).
 
 Everything else (animations, shaders, copy, layout, FAQ, privacy page) is
 production-ready as-is.

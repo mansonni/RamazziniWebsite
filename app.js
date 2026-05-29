@@ -15,9 +15,12 @@
   }/*EDITMODE-END*/;
 
   /* ---------- Checkout ----------
-     Checkout is a hosted Stripe Payment Link. No backend required.
-     To change price or product: create a new Payment Link in the Stripe
-     dashboard and replace the URL in the stripeBtn click handler below. */
+     Checkout is owned by the Ramazzini app. The "Join Beta Test" CTA sends the
+     visitor to the app, where they sign in / create an account and complete the
+     authenticated Stripe checkout; the app's webhook then grants beta access to
+     that account. No checkout backend is needed on the marketing site.
+     To change the destination, edit APP_CHECKOUT_URL below. */
+  const APP_CHECKOUT_URL = 'https://app.ramazziniai.com/billing';
 
   let state = Object.assign({}, TWEAK_DEFAULTS);
 
@@ -314,7 +317,6 @@
     const closeBtn  = document.getElementById('joinClose');
     const backdrop  = document.getElementById('joinBackdrop');
     const stripeBtn = document.getElementById('joinStripeBtn');
-    const googleBtn = document.getElementById('joinGoogleBtn');
     const seatBig   = document.getElementById('joinSeatCount');
 
     function refreshSeatCount() {
@@ -322,23 +324,14 @@
     }
     refreshSeatCount();
 
-    // Stripe Checkout — hosted Payment Link
+    // "Join Beta Test" -> sign in + Stripe checkout in the Ramazzini app (APP_CHECKOUT_URL).
     stripeBtn.addEventListener('click', () => {
       stripeBtn.disabled = true;
-      stripeBtn.innerHTML = stripeBtn.innerHTML.replace(/Pay \$14\.99 with Stripe/, 'Redirecting\u2026');
-      window.location.href = 'https://buy.stripe.com/dRmbJ11vugR2gO17ouaEE01';
+      stripeBtn.textContent = 'Redirecting\u2026';
+      window.location.href = APP_CHECKOUT_URL;
     });
 
-    // Google OAuth — dev: replace with real redirect to /auth/google
-    googleBtn.addEventListener('click', () => {
-      // === REAL IMPLEMENTATION ===
-      // window.location.href = API.GOOGLE_AUTH_ENDPOINT;
-      // === END REAL ===
-
-      // demo: just close the modal and toast
-      closeJoinModal();
-      console.info('[demo] Google sign-in clicked. Wire up /auth/google in HANDOFF.md.');
-    });
+    // (Sign-in, incl. Google, is handled by the Ramazzini app after the redirect above.)
 
     function open() {
       refreshSeatCount();
