@@ -14,26 +14,10 @@
     "seatsRemaining": 25
   }/*EDITMODE-END*/;
 
-  /* ---------- Backend integration config ----------
-     Developers: see HANDOFF.md for full wiring instructions.
-
-     PUBLIC_STRIPE_PRICE_ID  → the Stripe Price (one-time, $14.99 USD) that
-                              the backend `/api/checkout` route uses to
-                              create a Checkout Session and return its URL.
-     SEATS_ENDPOINT          → GET returns { remaining: <int 0..25> }.
-                              Front-end polls this every 30s so the counter
-                              stays live as new sign-ups come in.
-     CHECKOUT_ENDPOINT       → POST. Server creates a Stripe Checkout Session
-                              and returns { url } to redirect to.
-     GOOGLE_AUTH_ENDPOINT    → GET. Kicks off Google OAuth, then redirects
-                              back to the post-payment success page.
-  */
-  const API = {
-    SEATS_ENDPOINT:       '/api/seats',
-    CHECKOUT_ENDPOINT:    '/api/checkout',
-    GOOGLE_AUTH_ENDPOINT: '/auth/google',
-    PUBLIC_STRIPE_PRICE_ID: 'price_REPLACE_ME',
-  };
+  /* ---------- Checkout ----------
+     Checkout is a hosted Stripe Payment Link. No backend required.
+     To change price or product: create a new Payment Link in the Stripe
+     dashboard and replace the URL in the stripeBtn click handler below. */
 
   let state = Object.assign({}, TWEAK_DEFAULTS);
 
@@ -375,19 +359,6 @@
     window.closeJoinModal = close;
   }
 
-  /* Simulate a successful payment (DEMO ONLY).
-     The real backend will decrement seats and notify all clients;
-     this just fakes it for the static demo. */
-  function simulatePaymentSuccess() {
-    if (state.seatsRemaining > 0) state.seatsRemaining -= 1;
-    const joined = loadJoined();
-    joined.push(pickInitials(joined));
-    saveJoined(joined);
-    setupCounter();
-    closeJoinModal();
-    toast('You\'re in! Check your inbox for next steps. \ud83c\udf3f');
-  }
-
   /* ---------- Tiny toast ---------- */
   function toast(msg) {
     const t = document.createElement('div');
@@ -413,16 +384,6 @@
       setTimeout(() => t.remove(), 320);
     }, 3000);
   }
-
-  /* ---------- Poll backend for seat count ----------
-     Disabled in demo (no backend). Uncomment in production. */
-  // function pollSeats() {
-  //   fetch(API.SEATS_ENDPOINT).then(r => r.json()).then(({ remaining }) => {
-  //     state.seatsRemaining = remaining;
-  //     setupCounter();
-  //   }).catch(() => {});
-  // }
-  // setInterval(pollSeats, 30000); pollSeats();
 
   /* ---------- Tweaks panel ---------- */
   function setupTweaks() {
